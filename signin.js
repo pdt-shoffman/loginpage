@@ -95,7 +95,7 @@ $('#signin-button').on('click', function() {
 
     //Exercise content
     if (count > 5) {
-        var payload = {
+        var payload2 = {
             "event_action": "trigger",
             "client": "Splunk",
             "client_url": "http://54.193.12.191:8000/en-US/app/search/search?q=search%20login",
@@ -116,12 +116,12 @@ $('#signin-button').on('click', function() {
             }
         };
 
-         var options = {
-            data: JSON.stringify(payload)
+         var options2 = {
+            data: JSON.stringify(payload2)
         };
 
-        PDCEFEvent(options)
-    }
+        PDCEFEvent(options2)
+    };
 
 });
 
