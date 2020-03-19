@@ -171,53 +171,5 @@ $('#signin-button').on('click', function() {
     PDCEFEvent(options)
 });
 
-$('#cu-signin-button').on('click', function() {
-    if (email != $('#inputEmail').val()) count = 0;
-    count++;
-    email = $('#inputEmail').val();
-
-    var alertbox = `
-	<div id="alert" class="alert alert-danger alert-dismissible fade show" role="alert">
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-		</button>
-		Login failed for <strong>${email}</strong>. Please try again later.
-	</div>
-	`;
-
-    $('#alert-container').html(alertbox);
-
-    var payload = {
-        "event_action": "trigger",
-        "client": "Splunk",
-        "client_url": "http://54.193.12.191:8000/en-US/app/search/search?q=search%20login",
-        "dedup_key": `failed_login_${email}`,
-        "routing_key": routing_key,
-        "payload": {
-            "summary": `Login failure for username ${email}`,
-            "source": "Splunk",
-            "severity": "critical",
-            "custom_details": {
-                "From": myIP,
-                "Event": "Logon",
-                "User": email,
-                "Last_Attempt": new Date(),
-                "To": document.title,
-                "Failure_Times": count
-            }
-        }
-    };
-
-    var options = {
-        data: JSON.stringify(payload),
-        success: function(data) {
-        	setTimeout(findIncidentAndSetPriority, 5000, `failed_login_${email}`);
-            // findIncidentAndSetPriority(`failed_login_${email}`)
-        }
-    };
-
-    PDCEFEvent(options)
-});
-
 getIP();
 if (getParameterByName("title")) document.title = getParameterByName("title");
