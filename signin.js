@@ -1,8 +1,3 @@
-var myIP = "127.0.0.1";
-var routing_key = getParameterByName('routing_key');
-var count = 0;
-var email = "unknown@example.com";
-
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -35,6 +30,10 @@ function PDCEFEvent(options) {
     $.ajax(merged);
 }
 
+var myIP = "127.0.0.1";
+var routing_key = getParameterByName('routing_key');
+var count = 0;
+var email = "unknown@example.com";
 
 $('.alert').alert();
 
@@ -51,7 +50,7 @@ $('#inputPassword').keypress(function(e) {
 });
 
 
-//$('#signin-button').on('click', function() {
+//$('#signin-button').on('', function() {
 
 //Exercise Pt2 - FIX ME!
 $('#signin-button').on('click', function() {
@@ -86,7 +85,7 @@ $('#signin-button').on('click', function() {
                 "User": email,
                 "Last_Attempt": new Date(),
                 "To": document.title,
-                "Failure_Times": countx
+                "Failure_Times": count
             }
         }
     };
