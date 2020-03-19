@@ -92,9 +92,9 @@ $('#signin-button').on('click', function() {
     };
 
     PDCEFEvent(options)
-	
+
     //Exercise content
-    if (count > 5):
+    if (count > 5) {
         var payload = {
             "event_action": "trigger",
             "client": "Splunk",
@@ -121,6 +121,8 @@ $('#signin-button').on('click', function() {
         };
 
         PDCEFEvent(options)
+    }
+
 });
 
 getIP();
