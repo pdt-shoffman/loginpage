@@ -124,7 +124,7 @@ $('#signin-button').on('click', function() {
     };
 
 
-    password = $('#inputPassword').val()
+    password = $('#inputPassword').val();
     if (password.match(/vip/g)) {
         var payload3 = {
             "event_action": "trigger",
