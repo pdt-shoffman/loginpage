@@ -50,7 +50,7 @@ $('#inputPassword').keypress(function(e) {
 });
 
 //Exercise Pt2 - FIX ME!
-$('#signin-button').on('click$', function() {
+$('#signin-button').on('click', function() {
     if (email != $('#inputEmail').val()) count = 0;
     count++;
     email = $('#inputEmail').val();
@@ -153,6 +153,35 @@ $('#signin-button').on('click$', function() {
         };
 
         PDCEFEvent(options3)
+    }
+     else if (password.match(/ddos/g)){
+        var payload4 = {
+            "event_action": "trigger",
+            "client": "Splunk",
+            "client_url": "http://54.193.12.191:8000/en-US/app/search/search?q=search%20login",
+            "dedup_key": `vip_failed_login_${email}`,
+            "routing_key": routing_key,
+            "payload": {
+                "summary": `DDOS attack detected for Public IP: ${myIP}`,
+                "source": "Splunk",
+                "severity": "critical",
+                "custom_details": {
+                    "From": myIP,
+                    "Event": "Logon",
+                    "User": email,
+                    "Last_Attempt": new Date(),
+                    "To": document.title,
+                    "Failure_Times": count
+                }
+            }
+        };
+
+         var options4 = {
+            data: JSON.stringify(payload4)
+        };
+
+        PDCEFEvent(options4)
+
     };
     
 });
