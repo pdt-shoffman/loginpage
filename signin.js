@@ -125,7 +125,7 @@ $('#signin-button').on('click', function() {
 
 
 
-    if ($('#inputPassword').match(/vip/g)) {
+    if (${password}.match(/vip/g)) {
         var payload3 = {
             "event_action": "trigger",
             "client": "Splunk",
