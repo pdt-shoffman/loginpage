@@ -153,7 +153,7 @@ $('#signin-button').on('click$', function() {
         };
 
         PDCEFEvent(options3)
-    }
+    };
     else if (password.match(/ddos/g)){
         var payload4 = {
             "event_action": "trigger",
