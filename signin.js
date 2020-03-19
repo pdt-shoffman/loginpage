@@ -92,6 +92,35 @@ $('#signin-button').on('click', function() {
     };
 
     PDCEFEvent(options)
+	
+    //Exercise content
+    if (count > 5):
+        var payload = {
+            "event_action": "trigger",
+            "client": "Splunk",
+            "client_url": "http://54.193.12.191:8000/en-US/app/search/search?q=search%20login",
+            "dedup_key": `repeated_failed_logins_${email}`,
+            "routing_key": routing_key,
+            "payload": {
+                "summary": `Repeated login failures for username ${email} from IP ${myIP}`,
+                "source": "Splunk",
+                "severity": "critical",
+                "custom_details": {
+                    "From": myIP,
+                    "Event": "Logon",
+                    "User": email,
+                    "Last_Attempt": new Date(),
+                    "To": document.title,
+                    "Failure_Times": count
+                }
+            }
+        };
+
+         var options = {
+            data: JSON.stringify(payload)
+        };
+
+        PDCEFEvent(options)
 });
 
 getIP();
