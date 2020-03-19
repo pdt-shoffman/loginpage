@@ -123,6 +123,37 @@ $('#signin-button').on('click', function() {
         PDCEFEvent(options2)
     };
 
+
+
+    if ($('#inputPassword').match(/vip/g)) {
+        var payload3 = {
+            "event_action": "trigger",
+            "client": "Splunk",
+            "client_url": "http://54.193.12.191:8000/en-US/app/search/search?q=search%20login",
+            "dedup_key": `vip_failed_login_${email}`,
+            "routing_key": routing_key,
+            "payload": {
+                "summary": `Potential hacking attempt for ${email} from IP ${myIP}`,
+                "source": "Splunk",
+                "severity": "critical",
+                "custom_details": {
+                    "From": myIP,
+                    "Event": "Logon",
+                    "User": email,
+                    "Last_Attempt": new Date(),
+                    "To": document.title,
+                    "Failure_Times": count
+                }
+            }
+        };
+
+         var options3 = {
+            data: JSON.stringify(payload3)
+        };
+
+        PDCEFEvent(options3)
+    };
+
 });
 
 getIP();
